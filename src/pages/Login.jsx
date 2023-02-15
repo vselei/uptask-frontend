@@ -31,7 +31,7 @@ const Login = () => {
           </label>
           <input
             type="password"
-            placeholder="Digite suas senha"
+            placeholder="Digite sua senha"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="password"
           />
