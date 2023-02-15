@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Login = () => {
   return (
     <>
@@ -34,8 +36,20 @@ const Login = () => {
             id="password"
           />
         </div>
-        <input type="submit" value="Iniciar Sessão" className="bg-sky-700 w-full py-3 mb-5 text-white uppercase font-bold rounded-xl hover:cursor-pointer hover:bg-sky-800 transition-colors" />
+        <input
+          type="submit"
+          value="Iniciar Sessão"
+          className="bg-sky-700 w-full py-3 mb-5 text-white uppercase font-bold rounded-xl hover:cursor-pointer hover:bg-sky-800 transition-colors"
+        />
       </form>
+      <nav className="lg:flex lg:justify-between">
+        <Link className='block text-center my-5 text-slate-500 uppercase text-sm'  to='/sign-up'>
+          Não tem uma conta? Cadastre-se
+        </Link>
+        <Link className='block text-center my-5 text-slate-500 uppercase text-sm'  to='/forgot-password'>
+          Esqueceu sua senha?
+        </Link>
+      </nav>
     </>
   );
 };
