@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+
   return (
     <>
       <h1 className="text-sky-600 font-black text-6xl capitalize">
@@ -8,7 +14,7 @@ const SignUp = () => {
         <span className="text-slate-700">projetos</span>
       </h1>
       <form className="my-10 bg-white shadow rounded-lg p-10">
-      <div className="my-5">
+        <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"
             htmlFor="name"
@@ -20,6 +26,8 @@ const SignUp = () => {
             placeholder="Digite seu nome"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -34,6 +42,8 @@ const SignUp = () => {
             placeholder="Digite seu e-mail"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -48,6 +58,8 @@ const SignUp = () => {
             placeholder="Digite sua senha"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="password"
+            value={password}
+            onChange={e => setPassword(e.target.password)}
           />
         </div>
         <div className="my-5">
@@ -62,6 +74,8 @@ const SignUp = () => {
             placeholder="Repita sua senha"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="confirm-password"
+            value={repeatPassword}
+            onChange={e => setRepeatPassword(e.target.value)}
           />
         </div>
         <input
