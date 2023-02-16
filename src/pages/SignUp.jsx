@@ -32,19 +32,22 @@ export const action = async ({ request }) => {
   }
 
   try {
-    const response = await axios.post('http://localhost:4000/api/users', {
+    const { data: response } = await axios.post('http://localhost:4000/api/users', {
       name: data.name,
       email: data.email,
       password: data.password
     });
-  } catch (error) {
-    console.log(error);
-  }
 
-  return {
-    msg: '',
-    isError: false
-  };
+    return {
+      msg: response.msg,
+      isError: false
+    };
+  } catch (error) {
+    return {
+      msg: error.response.data.msg,
+      isError: true
+    }
+  }
 };
 
 const SignUp = () => {
