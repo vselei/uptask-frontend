@@ -5,7 +5,7 @@ import ConfirmAccount from '../pages/ConfirmAccount';
 import ForgotPassword from '../pages/ForgotPassword';
 import Login from '../pages/Login';
 import NewPassword from '../pages/NewPassword';
-import SignUp from '../pages/SignUp';
+import SignUp, {action as signUpAction} from '../pages/SignUp';
 
 const routes = createBrowserRouter([
   {
@@ -18,7 +18,8 @@ const routes = createBrowserRouter([
       },
       {
         path: '/sign-up',
-        element: <SignUp />
+        element: <SignUp />,
+        action: signUpAction
       },
       {
         path: '/forgot-password',
