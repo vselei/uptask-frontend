@@ -4,9 +4,14 @@ import AuthLayout from '../layouts/AuthLayout';
 import ConfirmAccount, {
   loader as confirmAccountLoader
 } from '../pages/ConfirmAccount';
-import ForgotPassword, {action as forgotPasswordAction} from '../pages/ForgotPassword';
+import ForgotPassword, {
+  action as forgotPasswordAction
+} from '../pages/ForgotPassword';
 import Login from '../pages/Login';
-import NewPassword from '../pages/NewPassword';
+import NewPassword, {
+  action as newPasswordAction,
+  loader as newPasswordLoader
+} from '../pages/NewPassword';
 import SignUp, { action as signUpAction } from '../pages/SignUp';
 
 const routes = createBrowserRouter([
@@ -30,7 +35,9 @@ const routes = createBrowserRouter([
       },
       {
         path: '/forgot-password/:token',
-        element: <NewPassword />
+        element: <NewPassword />,
+        action: newPasswordAction,
+        loader: newPasswordLoader
       },
       {
         path: '/confirm/:id',
