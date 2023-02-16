@@ -62,7 +62,7 @@ const SignUp = () => {
 
       {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
 
-      <Form method="post" className="my-10 bg-white shadow rounded-lg p-10">
+      <Form method="post" className="my-10 bg-white shadow rounded-lg p-10" noValidate>
         <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"
