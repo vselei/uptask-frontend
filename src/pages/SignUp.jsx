@@ -1,11 +1,27 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alert from '../components/Alert';
 
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [alert, setAlert] = useState({});
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if ([name, email, password, repeatPassword].includes('')) {
+      setAlert({
+        msg: 'Todos os campos são obrigatórios',
+        isError: false
+      });
+      return;
+    }
+  };
+
+  const { msg, isError } = alert;
 
   return (
     <>
@@ -13,7 +29,13 @@ const SignUp = () => {
         Criar sua conta e administrar seus{' '}
         <span className="text-slate-700">projetos</span>
       </h1>
-      <form onSubmit={handleSubmit} className="my-10 bg-white shadow rounded-lg p-10">
+
+      {msg && <Alert isError={isError}>{msg}</Alert>}
+
+      <form
+        onSubmit={handleSubmit}
+        className="my-10 bg-white shadow rounded-lg p-10"
+      >
         <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"
