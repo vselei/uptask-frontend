@@ -32,7 +32,7 @@ export const action = async ({ request }) => {
   }
 
   try {
-    const { data: response } = await axios.post('http://localhost:4000/api/users', {
+    const { data: response } = await axios.post(`${import.meta.env.VITE_API_URL}/api/users`, {
       name: data.name,
       email: data.email,
       password: data.password
