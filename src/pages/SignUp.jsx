@@ -13,7 +13,7 @@ const SignUp = () => {
         Criar sua conta e administrar seus{' '}
         <span className="text-slate-700">projetos</span>
       </h1>
-      <form className="my-10 bg-white shadow rounded-lg p-10">
+      <form onSubmit={handleSubmit} className="my-10 bg-white shadow rounded-lg p-10">
         <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"
