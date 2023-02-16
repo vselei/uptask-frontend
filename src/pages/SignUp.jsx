@@ -15,7 +15,7 @@ const SignUp = () => {
     if ([name, email, password, repeatPassword].includes('')) {
       setAlert({
         msg: 'Todos os campos são obrigatórios',
-        isError: false
+        isError: true
       });
       return;
     }
