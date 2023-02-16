@@ -6,7 +6,7 @@ export const action = async ({ request }) => {
 
   const data = Object.fromEntries(form);
 
-  const { password, "confirm-password":confirmPassword } = data;
+  const { password, 'confirm-password': confirmPassword } = data;
 
   if (Object.values(data).includes('')) {
     return {
@@ -18,6 +18,13 @@ export const action = async ({ request }) => {
   if (password !== confirmPassword) {
     return {
       msg: 'As senhas não são iguais',
+      isError: true
+    };
+  }
+
+  if (password.length < 6) {
+    return {
+      msg: 'Sua senha é muito curta. Mínimo de 6 caracteress',
       isError: true
     };
   }
