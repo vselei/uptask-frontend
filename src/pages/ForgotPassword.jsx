@@ -2,6 +2,8 @@ import { Link, Form, useActionData } from 'react-router-dom';
 
 import Alert from '../components/Alert';
 
+import axios from 'axios'
+
 export const action = async ({ request }) => {
   const form = await request.formData();
 
@@ -16,7 +18,25 @@ export const action = async ({ request }) => {
     };
   }
 
-  return null;
+  try {
+    const { data: response } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/users/forgot-password`,
+      {
+        email
+      }
+    );
+
+    return {
+      msg: response.msg,
+      isError: false
+    }
+  } catch (error) {
+    return {
+      msg: error.response.data.msg,
+      isError: true
+    };
+  }
+
 };
 
 const ForgotPassword = () => {
@@ -38,7 +58,7 @@ const ForgotPassword = () => {
             Email
           </label>
           <input
-          name='email'
+            name="email"
             type="email"
             placeholder="Digite seu e-mail"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
