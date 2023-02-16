@@ -1,11 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import AuthLayout from '../layouts/AuthLayout';
-import ConfirmAccount from '../pages/ConfirmAccount';
+import ConfirmAccount, {
+  loader as confirmAccountLoader
+} from '../pages/ConfirmAccount';
 import ForgotPassword from '../pages/ForgotPassword';
 import Login from '../pages/Login';
 import NewPassword from '../pages/NewPassword';
-import SignUp, {action as signUpAction} from '../pages/SignUp';
+import SignUp, { action as signUpAction } from '../pages/SignUp';
 
 const routes = createBrowserRouter([
   {
@@ -31,7 +33,8 @@ const routes = createBrowserRouter([
       },
       {
         path: '/confirm/:id',
-        element: <ConfirmAccount />
+        element: <ConfirmAccount />,
+        loader: confirmAccountLoader
       }
     ]
   }
