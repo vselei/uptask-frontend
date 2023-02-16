@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { Link, Form, useActionData } from 'react-router-dom';
 import Alert from '../components/Alert';
 
@@ -24,9 +26,19 @@ export const action = async ({ request }) => {
 
   if (password.length < 6) {
     return {
-      msg: 'Sua senha é muito curta. Mínimo de 6 caracteress',
+      msg: 'Sua senha é muito curta. Mínimo de 6 carácteres',
       isError: true
     };
+  }
+
+  try {
+    const response = await axios.post('http://localhost:4000/api/users', {
+      name: data.name,
+      email: data.email,
+      password: data.password
+    });
+  } catch (error) {
+    console.log(error);
   }
 
   return {
