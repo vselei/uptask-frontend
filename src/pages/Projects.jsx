@@ -1,5 +1,11 @@
 const Projects = () => {
-  return <div>hello</div>;
+  return (
+    <>
+      <h1 className="text-4xl font-black">Projetos</h1>
+
+      <div></div>
+    </>
+  );
 };
 
 export default Projects;
