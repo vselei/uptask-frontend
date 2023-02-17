@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { AuthProvider } from '../context/AuthProvider';
+
 import AuthLayout from '../layouts/AuthLayout';
+
 import ConfirmAccount, {
   loader as confirmAccountLoader
 } from '../pages/ConfirmAccount';
@@ -20,7 +23,7 @@ import Projects from '../pages/Projects';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <AuthLayout />,
+    element: <AuthProvider><AuthLayout /></AuthProvider>,
     children: [
       {
         index: true,
@@ -52,7 +55,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/projects',
-    element: <ProtectedRoute />,
+    element: <AuthProvider><ProtectedRoute /></AuthProvider>,
     children: [
       {
         index: true,
