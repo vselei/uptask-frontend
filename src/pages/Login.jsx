@@ -4,6 +4,7 @@ import Alert from '../components/Alert';
 import useAuth from '../hooks/useAuth';
 
 import axiosClient from '../config/axiosClient';
+import { useEffect } from 'react';
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -23,8 +24,10 @@ export const action = async ({ request }) => {
       password
     });
 
-    localStorage.setItem("token", data.token)
-    return {}
+    localStorage.setItem('token', data.token);
+    return {
+      data
+    };
   } catch (error) {
     return {
       msg: error.response.data.msg,
@@ -35,8 +38,14 @@ export const action = async ({ request }) => {
 
 const Login = () => {
   const alert = useActionData();
-  
-  const {} = useAuth();
+
+  const { setAuth } = useAuth();
+
+  useEffect(() => {
+    if (alert?.data) {
+      setAuth(alert.data);
+    }
+  }, [alert]);
 
   return (
     <>
@@ -45,7 +54,7 @@ const Login = () => {
         <span className="text-slate-700">projetos</span>
       </h1>
       {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
-      <Form method='post' className="my-10 bg-white shadow rounded-lg p-10">
+      <Form method="post" className="my-10 bg-white shadow rounded-lg p-10">
         <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"
