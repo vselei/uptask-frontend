@@ -1,6 +1,7 @@
 import { Link, useActionData, useNavigate, Form } from 'react-router-dom';
 
 import Alert from '../components/Alert';
+import useAuth from '../hooks/useAuth';
 
 import axiosClient from '../config/axiosClient';
 
@@ -34,6 +35,8 @@ export const action = async ({ request }) => {
 
 const Login = () => {
   const alert = useActionData();
+  
+  const {} = useAuth();
 
   return (
     <>
