@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosClient from '../config/axiosClient';
 
 import { Link, Form, useActionData } from 'react-router-dom';
 import Alert from '../components/Alert';
@@ -32,7 +32,7 @@ export const action = async ({ request }) => {
   }
 
   try {
-    const { data: response } = await axios.post(`${import.meta.env.VITE_API_URL}/api/users`, {
+    const { data: response } = await axiosClient.post('/users', {
       name: data.name,
       email: data.email,
       password: data.password
@@ -46,7 +46,7 @@ export const action = async ({ request }) => {
     return {
       msg: error.response.data.msg,
       isError: true
-    }
+    };
   }
 };
 
@@ -62,7 +62,11 @@ const SignUp = () => {
 
       {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
 
-      <Form method="post" className="my-10 bg-white shadow rounded-lg p-10" noValidate>
+      <Form
+        method="post"
+        className="my-10 bg-white shadow rounded-lg p-10"
+        noValidate
+      >
         <div className="my-5">
           <label
             className="uppercase text-gray-600 block text-xl font-bold"

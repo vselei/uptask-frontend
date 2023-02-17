@@ -1,15 +1,14 @@
-import axios from 'axios';
-
 import { Link, useLoaderData } from 'react-router-dom';
 
 import Alert from '../components/Alert';
+import axiosClient from '../config/axiosClient';
 
 export const loader = async ({ params }) => {
   const { id } = params;
 
   try {
-    const url = `${import.meta.env.VITE_API_URL}/api/users/confirm/${id}`;
-    const { data } = await axios(url);
+    const url = `/users/confirm/${id}`;
+    const { data } = await axiosClient(url);
     return {
       msg: data.msg,
       isError: false,
@@ -32,7 +31,7 @@ const ConfirmAccount = () => {
         Confirme sua conta e comece a criar seus{' '}
         <span className="text-slate-700">projetos</span>
       </h1>
-      <div className='mt-20 md:mt-10 shadow-lg px-5 py-10 rounded-xl bg-white'>
+      <div className="mt-20 md:mt-10 shadow-lg px-5 py-10 rounded-xl bg-white">
         {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
         {alert?.confirm && (
           <Link

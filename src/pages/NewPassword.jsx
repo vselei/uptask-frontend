@@ -1,18 +1,14 @@
 import { useLoaderData, Form, useActionData, Link } from 'react-router-dom';
 
-import axios from 'axios';
+import axiosClient from '../config/axiosClient';
 
 import Alert from '../components/Alert';
 
 export const loader = async ({ params }) => {
-  const {token} = params;
+  const { token } = params;
 
   try {
-    await axios(
-      `${import.meta.env.VITE_API_URL}/api/users/forgot-password/${
-        token
-      }`
-    );
+    await axiosClient(`/users/forgot-password/${token}`);
 
     return {
       isValid: true,
@@ -38,8 +34,8 @@ export const action = async ({ request, params }) => {
   }
 
   try {
-    const url = `${import.meta.env.VITE_API_URL}/api/users/forgot-password/${params.token}`;
-    const { data } = await axios.post(url, {
+    const url = `/users/forgot-password/${params.token}`;
+    const { data } = await axiosClient.post(url, {
       password
     });
     console.log(data);
@@ -54,7 +50,6 @@ export const action = async ({ request, params }) => {
     };
   }
 };
-
 
 const NewPassword = () => {
   const data = useLoaderData();
