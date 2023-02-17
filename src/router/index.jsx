@@ -14,6 +14,9 @@ import NewPassword, {
 } from '../pages/NewPassword';
 import SignUp, { action as signUpAction } from '../pages/SignUp';
 
+import ProtectedRoute from '../layouts/ProtectedRoute';
+import Projects from '../pages/Projects';
+
 const routes = createBrowserRouter([
   {
     path: '/',
@@ -44,6 +47,16 @@ const routes = createBrowserRouter([
         path: '/confirm/:id',
         element: <ConfirmAccount />,
         loader: confirmAccountLoader
+      }
+    ]
+  },
+  {
+    path: '/projects',
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <Projects />
       }
     ]
   }
