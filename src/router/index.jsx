@@ -7,7 +7,7 @@ import ConfirmAccount, {
 import ForgotPassword, {
   action as forgotPasswordAction
 } from '../pages/ForgotPassword';
-import Login from '../pages/Login';
+import Login, { action as loginAction } from '../pages/Login';
 import NewPassword, {
   loader as newPasswordLoader,
   action as newPasswordAction
@@ -21,7 +21,8 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Login />
+        element: <Login />,
+        action: loginAction
       },
       {
         path: '/sign-up',
