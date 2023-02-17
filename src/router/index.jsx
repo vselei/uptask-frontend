@@ -9,8 +9,8 @@ import ForgotPassword, {
 } from '../pages/ForgotPassword';
 import Login from '../pages/Login';
 import NewPassword, {
-  action as newPasswordAction,
-  loader as newPasswordLoader
+  loader as newPasswordLoader,
+  action as newPasswordAction
 } from '../pages/NewPassword';
 import SignUp, { action as signUpAction } from '../pages/SignUp';
 
