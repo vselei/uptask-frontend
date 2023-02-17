@@ -11,7 +11,7 @@ const Header = () => {
           className="rounded-lg lg:w-96 block p-2 border"
         />
         <div className='flex items-center gap-4'>
-          <Link to="/projects" className="font-bold uppercase">
+          <Link to="projects" className="font-bold uppercase">
             Projetos
           </Link>
           <button
