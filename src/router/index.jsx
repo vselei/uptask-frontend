@@ -21,7 +21,7 @@ import SignUp, { action as signUpAction } from '../pages/SignUp';
 import ProtectedRoute from '../layouts/ProtectedRoute';
 import Projects from '../pages/Projects';
 import NewProject, { action as newProjectAction } from '../pages/NewProject';
-import Project from '../pages/Project';
+import Project, { loader as projectLoader } from '../pages/Project';
 
 const routes = createBrowserRouter([
   {
@@ -81,7 +81,8 @@ const routes = createBrowserRouter([
       },
       {
         path: '/projects/:id',
-        element: <Project />
+        element: <Project />,
+        loader: projectLoader
       }
     ]
   }
