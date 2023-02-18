@@ -1,8 +1,6 @@
-import { Form as Formulary } from 'react-router-dom';
-
 const Form = () => {
   return (
-    <Formulary className="bg-white py-10 px-5 md:w-1/2 rounded-lg">
+    <>
       <div className="mb-5">
         <label
           className="text-gray-700 uppercase font-bold text-sml"
@@ -15,6 +13,7 @@ const Form = () => {
           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           id="name"
           placeholder="Nome do Projeto"
+          name="name"
         />
       </div>
       <div className="mb-5">
@@ -29,6 +28,7 @@ const Form = () => {
           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           id="description"
           placeholder="Descrição do Projeto"
+          name="description"
         />
       </div>
       <div className="mb-5">
@@ -42,6 +42,7 @@ const Form = () => {
           type="date"
           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           id="date"
+          name="date"
         />
       </div>
       <div className="mb-5">
@@ -56,6 +57,7 @@ const Form = () => {
           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           id="client"
           placeholder="Nome do Cliente"
+          name="client"
         />
       </div>
       <input
@@ -63,7 +65,7 @@ const Form = () => {
         value="Criar Projeto"
         className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
       />
-    </Formulary>
+    </>
   );
 };
 

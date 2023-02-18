@@ -20,7 +20,7 @@ import SignUp, { action as signUpAction } from '../pages/SignUp';
 
 import ProtectedRoute from '../layouts/ProtectedRoute';
 import Projects from '../pages/Projects';
-import NewProject from '../pages/NewProject';
+import NewProject, { action as newProjectAction } from '../pages/NewProject';
 
 const routes = createBrowserRouter([
   {
@@ -75,7 +75,8 @@ const routes = createBrowserRouter([
       },
       {
         path: '/projects/create-project',
-        element: <NewProject />
+        element: <NewProject />,
+        action: newProjectAction
       }
     ]
   }
