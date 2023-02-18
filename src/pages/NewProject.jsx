@@ -22,8 +22,6 @@ export const action = async ({ request }) => {
 const NewProject = () => {
   const data = useActionData();
 
-  const navigate = useNavigate();
-
   const { showAlert, alert, submitProjects } = useProjects();
 
   useEffect(() => {
