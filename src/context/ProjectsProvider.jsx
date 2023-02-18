@@ -34,6 +34,8 @@ const ProjectsProvider = ({ children }) => {
 
       const { data } = await axiosClient.post('/projects', project, config);
 
+      setProjects([...projects, data]);
+
       setAlert({
         msg: 'Projeto criado corretamente',
         isError: false
@@ -67,7 +69,7 @@ const ProjectsProvider = ({ children }) => {
 
         setProjects(data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
 
