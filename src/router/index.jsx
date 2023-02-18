@@ -26,11 +26,9 @@ const routes = createBrowserRouter([
   {
     path: '/',
     element: (
-      <ProjectsProvider>
-        <AuthProvider>
-          <AuthLayout />
-        </AuthProvider>
-      </ProjectsProvider>
+      <AuthProvider>
+        <AuthLayout />
+      </AuthProvider>
     ),
     children: [
       {
