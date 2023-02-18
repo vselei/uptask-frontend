@@ -32,12 +32,11 @@ const AuthProvider = ({ children }) => {
         navigate('/projects');
       } catch (error) {
         navigate('/');
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     };
     authUser();
-  }, [auth]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, loading }}>

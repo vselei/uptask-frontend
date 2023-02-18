@@ -63,7 +63,7 @@ const routes = createBrowserRouter([
         element: <Projects />
       },
       {
-        path: '/create-project',
+        path: '/projects/create-project',
         element: <NewProject />
       }
     ]

@@ -1,4 +1,4 @@
-import { Link, useActionData, Form } from 'react-router-dom';
+import { Link, useActionData, Form, useNavigate } from 'react-router-dom';
 
 import Alert from '../components/Alert';
 import useAuth from '../hooks/useAuth';
@@ -39,13 +39,20 @@ export const action = async ({ request }) => {
 const Login = () => {
   const alert = useActionData();
 
-  const { setAuth } = useAuth();
+  const { setAuth, auth } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (alert?.data) {
       setAuth(alert.data);
     }
   }, [alert]);
+
+  useEffect(() => {
+    if (alert?.data && auth._id) {
+      navigate('/projects');
+    }
+  }, [alert, auth]);
 
   return (
     <>
