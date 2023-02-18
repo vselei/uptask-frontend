@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AuthProvider } from '../context/AuthProvider';
+import { ProjectsProvider } from '../context/ProjectsProvider';
 
 import AuthLayout from '../layouts/AuthLayout';
 
@@ -24,7 +25,13 @@ import NewProject from '../pages/NewProject';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <AuthProvider><AuthLayout /></AuthProvider>,
+    element: (
+      <ProjectsProvider>
+        <AuthProvider>
+          <AuthLayout />
+        </AuthProvider>
+      </ProjectsProvider>
+    ),
     children: [
       {
         index: true,
@@ -56,7 +63,13 @@ const routes = createBrowserRouter([
   },
   {
     path: '/projects',
-    element: <AuthProvider><ProtectedRoute /></AuthProvider>,
+    element: (
+      <ProjectsProvider>
+        <AuthProvider>
+          <ProtectedRoute />
+        </AuthProvider>
+      </ProjectsProvider>
+    ),
     children: [
       {
         index: true,
