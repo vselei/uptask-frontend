@@ -1,3 +1,5 @@
+import { redirect, useLoaderData } from 'react-router-dom';
+
 import axiosClient from '../config/axiosClient';
 
 export const loader = async ({ params }) => {
@@ -16,17 +18,21 @@ export const loader = async ({ params }) => {
   };
 
   try {
-    const {data} = await axiosClient(`/projects/${id}`, config);
+    const { data } = await axiosClient(`/projects/${id}`, config);
     return data;
   } catch (error) {
-    return {
-      msg: 'teste'
-    }
+    return redirect('/');
   }
 };
 
 const Project = () => {
-  return <div>1</div>;
+  const data = useLoaderData();
+
+  return (
+    <div>
+      <h1 className="font-black text-4xl">{data?.name}</h1>
+    </div>
+  );
 };
 
 export default Project;
