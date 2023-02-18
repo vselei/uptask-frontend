@@ -17,7 +17,12 @@ export const loader = async ({ params }) => {
 
   try {
     const {data} = await axiosClient(`/projects/${id}`, config);
-  } catch (error) {}
+    return data;
+  } catch (error) {
+    return {
+      msg: 'teste'
+    }
+  }
 };
 
 const Project = () => {
