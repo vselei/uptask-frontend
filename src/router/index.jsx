@@ -22,6 +22,7 @@ import ProtectedRoute from '../layouts/ProtectedRoute';
 import Projects from '../pages/Projects';
 import NewProject, { action as newProjectAction } from '../pages/NewProject';
 import Project, { loader as projectLoader } from '../pages/Project';
+import EditProject, { loader as editProjectLoader } from '../pages/EditProject';
 
 const routes = createBrowserRouter([
   {
@@ -83,6 +84,11 @@ const routes = createBrowserRouter([
         path: '/projects/:id',
         element: <Project />,
         loader: projectLoader
+      },
+      {
+        path: '/projects/edit/:id',
+        element: <EditProject />,
+        loader: editProjectLoader
       }
     ]
   }
