@@ -76,13 +76,32 @@ const ProjectsProvider = ({ children }) => {
     getProjects();
   }, []);
 
+  const updateProject = async actionData => {
+    const updatedProjects = projects.map(projectState =>
+      projectState._id === actionData._id ? actionData : projectState
+    );
+
+    setProjects(updatedProjects);
+
+    setAlert({
+      msg: 'Projeto atualizado corretamente',
+      isError: false
+    });
+
+    setTimeout(() => {
+      setAlert({});
+      navigate('/projects');
+    }, 3000);
+  };
+
   return (
     <ProjectsContext.Provider
       value={{
         projects,
         showAlert,
         alert,
-        submitProjects
+        submitProjects,
+        updateProject
       }}
     >
       {children}

@@ -9,6 +9,8 @@ import Form from '../components/Form';
 import Alert from '../components/Alert';
 
 import axiosClient from '../config/axiosClient';
+import { useEffect } from 'react';
+import useProjects from '../hooks/useProjects';
 
 export const action = async ({ params, request }) => {
   const form = await request.formData();
@@ -34,11 +36,14 @@ export const action = async ({ params, request }) => {
         Authorization: `Bearer ${token}`
       }
     };
-    const { data } = await axiosClient.put(
+
+    const { data: response } = await axiosClient.put(
       `/projects/${params.id}`,
       data,
       config
     );
+
+    return response;
   } catch (error) {
     return {
       msg: error?.response?.data?.msg,
@@ -74,13 +79,23 @@ const EditProject = () => {
   const data = useLoaderData();
   const actionData = useActionData();
 
+  const { updateProject, alert } = useProjects();
+
+  useEffect(() => {
+    if (actionData && !actionData?.msg) {
+      updateProject(actionData);
+    }
+  }, [actionData]);
+
   return (
     <>
       <h1 className="font-black text-4xl">Editar Projeto: {data?.name}</h1>
       <div className="mt-10 flex justify-center">
         <Formulary method="post">
-          {actionData?.msg && (
-            <Alert isError={actionData?.isError}>{actionData?.msg}</Alert>
+          {(alert?.msg || actionData?.msg) && (
+            <Alert isError={alert?.isError || actionData?.isError}>
+              {actionData?.msg || alert?.msg}
+            </Alert>
           )}
           <Form project={data} />
         </Formulary>
