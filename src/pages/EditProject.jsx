@@ -34,7 +34,7 @@ const EditProject = () => {
       <h1 className="font-black text-4xl">Editar Projeto: {data?.name}</h1>
       <div className='mt-10 flex justify-center'>
         <Formulary>
-          <Form />
+          <Form project={data} />
         </Formulary>
       </div>
     </>

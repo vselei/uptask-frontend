@@ -1,4 +1,8 @@
-const Form = () => {
+import { useParams } from 'react-router-dom';
+
+const Form = ({ project }) => {
+  const params = useParams();
+
   return (
     <>
       <div className="mb-5">
@@ -14,6 +18,7 @@ const Form = () => {
           id="name"
           placeholder="Nome do Projeto"
           name="name"
+          defaultValue={params.id && project?.name}
         />
       </div>
       <div className="mb-5">
@@ -29,6 +34,7 @@ const Form = () => {
           id="description"
           placeholder="Descrição do Projeto"
           name="description"
+          defaultValue={params.id && project?.description}
         />
       </div>
       <div className="mb-5">
@@ -43,6 +49,7 @@ const Form = () => {
           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           id="date"
           name="date"
+          defaultValue={params.id && project?.date?.split('T')[0]}
         />
       </div>
       <div className="mb-5">
@@ -58,11 +65,12 @@ const Form = () => {
           id="client"
           placeholder="Nome do Cliente"
           name="client"
+          defaultValue={params.id && project?.client}
         />
       </div>
       <input
         type="submit"
-        value="Criar Projeto"
+        value={params.id ? 'Editar Projeto' : 'Criar Projeto'}
         className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
       />
     </>
