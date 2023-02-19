@@ -39,7 +39,12 @@ export const action = async ({ params, request }) => {
       data,
       config
     );
-  } catch (error) {}
+  } catch (error) {
+    return {
+      msg: error?.response?.data?.msg,
+      isError: true
+    };
+  }
 };
 
 export const loader = async ({ params }) => {
