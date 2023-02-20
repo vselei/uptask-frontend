@@ -1,5 +1,7 @@
 import { Link, redirect, useLoaderData } from 'react-router-dom';
 
+import TaskModal from '../components/TaskModal';
+
 import axiosClient from '../config/axiosClient';
 
 export const loader = async ({ params }) => {
@@ -81,6 +83,7 @@ const Project = () => {
         </svg>
         Adicionar Tarefa
       </button>
+      <TaskModal />
     </>
   );
 };
