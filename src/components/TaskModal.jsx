@@ -1,13 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import useProjects from '../hooks/useProjects';
 
-const TaskModal = ({ modal, setModal }) => {
+const TaskModal = () => {
+  const { handleTaskModal, taskModal } = useProjects();
+
   return (
-    <Transition.Root show={modal} as={Fragment}>
+    <Transition.Root show={taskModal} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
-        onClose={() => setModal(false)}
+        onClose={handleTaskModal}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -44,7 +47,7 @@ const TaskModal = ({ modal, setModal }) => {
                 <button
                   type="button"
                   className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => setModal(false)}
+                  onClick={handleTaskModal}
                 >
                   <span className="sr-only">Cerrar</span>
                   <svg
@@ -65,10 +68,10 @@ const TaskModal = ({ modal, setModal }) => {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                   <Dialog.Title
-                    as="h3"
-                    className="text-lg leading-6 font-bold text-gray-900"
+                    as="h1"
+                    className="text-4xl leading-6 font-bold text-gray-900"
                   >
-                    <h1 className="text-4xl">Titulo</h1>
+                    Titulo
                   </Dialog.Title>
                   <p>Content</p>
                 </div>

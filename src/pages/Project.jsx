@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { Link, redirect, useLoaderData } from 'react-router-dom';
 
 import TaskModal from '../components/TaskModal';
 
 import axiosClient from '../config/axiosClient';
+import useProjects from '../hooks/useProjects';
 
 export const loader = async ({ params }) => {
   const { id } = params;
@@ -36,7 +36,7 @@ export const loader = async ({ params }) => {
 const Project = () => {
   const data = useLoaderData();
 
-  const [modal, setModal] = useState(false);
+  const {handleTaskModal} = useProjects();
 
   return (
     <>
@@ -67,7 +67,7 @@ const Project = () => {
       </div>
 
       <button
-        onClick={() => setModal(true)}
+        onClick={handleTaskModal}
         type="button"
         className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase font-bold bg-sky-400 text-white text-center mt-5 flex gap-2 items-center justify-center"
       >
@@ -87,7 +87,7 @@ const Project = () => {
         </svg>
         Adicionar Tarefa
       </button>
-      <TaskModal modal={modal} setModal={setModal} />
+      <TaskModal />
     </>
   );
 };

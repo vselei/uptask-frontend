@@ -7,6 +7,7 @@ const ProjectsContext = createContext();
 const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [alert, setAlert] = useState({});
+  const [taskModal, setTaskModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -127,6 +128,10 @@ const ProjectsProvider = ({ children }) => {
     }
   };
 
+  const handleTaskModal = () => {
+    setTaskModal(!taskModal);
+  };
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -135,7 +140,9 @@ const ProjectsProvider = ({ children }) => {
         alert,
         submitProjects,
         updateProject,
-        deleteProject
+        deleteProject,
+        handleTaskModal,
+        taskModal
       }}
     >
       {children}
