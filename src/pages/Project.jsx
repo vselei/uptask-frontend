@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, redirect, useLoaderData } from 'react-router-dom';
 
 import TaskModal from '../components/TaskModal';
@@ -35,6 +36,8 @@ export const loader = async ({ params }) => {
 const Project = () => {
   const data = useLoaderData();
 
+  const [modal, setModal] = useState(false);
+
   return (
     <>
       <div className="flex justify-between">
@@ -64,6 +67,7 @@ const Project = () => {
       </div>
 
       <button
+        onClick={() => setModal(true)}
         type="button"
         className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase font-bold bg-sky-400 text-white text-center mt-5 flex gap-2 items-center justify-center"
       >
@@ -83,7 +87,7 @@ const Project = () => {
         </svg>
         Adicionar Tarefa
       </button>
-      <TaskModal />
+      <TaskModal modal={modal} setModal={setModal} />
     </>
   );
 };
