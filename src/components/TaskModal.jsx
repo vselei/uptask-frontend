@@ -5,6 +5,10 @@ import useProjects from '../hooks/useProjects';
 const TaskModal = () => {
   const { handleTaskModal, taskModal } = useProjects();
 
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState('');
+
   return (
     <Transition.Root show={taskModal} as={Fragment}>
       <Dialog
@@ -68,12 +72,72 @@ const TaskModal = () => {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                   <Dialog.Title
-                    as="h1"
+                    as="h3"
                     className="text-4xl leading-6 font-bold text-gray-900"
                   >
-                    Titulo
+                    Criar Tarefa
                   </Dialog.Title>
-                  <p>Content</p>
+                  <form className="my-10">
+                    <div className="mb-5">
+                      <label
+                        htmlFor="name"
+                        className="text-gray-700 uppercase font-bold text-sm"
+                      >
+                        Nome da Tarefa
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Nome da Tarefa"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-5">
+                      <label
+                        htmlFor="description"
+                        className="text-gray-700 uppercase font-bold text-sm"
+                      >
+                        Descrição da Tarefa
+                      </label>
+                      <textarea
+                        as="textarea"
+                        id="description"
+                        name="description"
+                        placeholder="Descrição da Tarefa"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-5">
+                      <label
+                        htmlFor="priority"
+                        className="text-gray-700 uppercase font-bold text-sm"
+                      >
+                        Prioridade
+                      </label>
+                      <select
+                        id="priority"
+                        name="priority"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={priority}
+                        onChange={e => setPriority(e.target.value)}
+                      >
+                        <option value="">-- Selecione --</option>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Média">Média</option>
+                        <option value="Alta">Alta</option>
+                      </select>
+                    </div>
+                    <input
+                      type="submit"
+                      className="bg-sky-600 hover:bg-sky-700 p-3 w-full uppercase text-white font-bold cursor-pointer transition-colors rounded text-sm"
+                      value="Criar Tarefa"
+                    />
+                  </form>
                 </div>
               </div>
             </div>
