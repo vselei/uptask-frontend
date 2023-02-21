@@ -1,16 +1,20 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import useProjects from '../hooks/useProjects';
 import Alert from './Alert';
 
 const TaskModal = () => {
+  const params = useParams();
+
   const { handleTaskModal, taskModal, showAlert, alert, submitTask } =
     useProjects();
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
+  const [date, setDate] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +29,9 @@ const TaskModal = () => {
     submitTask({
       name,
       description,
-      priority
+      priority,
+      date,
+      project: params.id
     });
   };
 
@@ -133,6 +139,22 @@ const TaskModal = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={description}
                         onChange={e => setDescription(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-5">
+                      <label
+                        htmlFor="date"
+                        className="text-gray-700 uppercase font-bold text-sm"
+                      >
+                        Data de Entrega
+                      </label>
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={date}
+                        onChange={e => setDate(e.target.value)}
                       />
                     </div>
                     <div className="mb-5">
