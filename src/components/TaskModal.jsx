@@ -1,13 +1,33 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+
 import useProjects from '../hooks/useProjects';
+import Alert from './Alert';
 
 const TaskModal = () => {
-  const { handleTaskModal, taskModal } = useProjects();
+  const { handleTaskModal, taskModal, showAlert, alert, submitTask } =
+    useProjects();
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if ([name, description, priority].includes('')) {
+      showAlert({
+        msg: 'Todos os campos são obrigatórios',
+        isError: true
+      });
+      return;
+    }
+
+    submitTask({
+      name,
+      description,
+      priority
+    });
+  };
 
   return (
     <Transition.Root show={taskModal} as={Fragment}>
@@ -77,7 +97,10 @@ const TaskModal = () => {
                   >
                     Criar Tarefa
                   </Dialog.Title>
-                  <form className="my-10">
+                  {alert?.msg && (
+                    <Alert isError={alert?.isError}>{alert?.msg}</Alert>
+                  )}
+                  <form onSubmit={handleSubmit} className="my-10">
                     <div className="mb-5">
                       <label
                         htmlFor="name"
