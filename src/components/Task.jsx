@@ -2,7 +2,7 @@ import { dateFormatter } from '../helpers/dateFormatter';
 import useProjects from '../hooks/useProjects';
 
 const Task = ({ task }) => {
-  const { handleTaskModal } = useProjects();
+  const { handleEditTask } = useProjects();
 
   const { description, priority, name, date, _id, state } = task;
   return (
@@ -10,13 +10,13 @@ const Task = ({ task }) => {
       <div className="space-y-2">
         <p className="text-xl">{name}</p>
         <p className="text-sm text-gray-500 uppercase">{description}</p>
-        <p className="text-xl">{dateFormatter(date)}</p>
+        <p className="text-sm">{dateFormatter(date)}</p>
         <p className="text-gray-600">Prioridade: {priority}</p>
       </div>
       <div className="flex gap-2">
         <button
           className="bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-          onClick={() => handleTaskModal(task)}
+          onClick={() => handleEditTask(task)}
         >
           Editar
         </button>

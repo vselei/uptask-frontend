@@ -11,10 +11,27 @@ const TaskModal = ({ setRevalidate }) => {
   const { handleTaskModal, taskModal, showAlert, alert, submitTask, task } =
     useProjects();
 
+  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
   const [date, setDate] = useState('');
+
+  useEffect(() => {
+    if (task?._id) {
+      setId(task._id);
+      setName(task.name);
+      setDescription(task.description);
+      setPriority(task.priority);
+      setDate(task.date?.split('T')[0]);
+      return;
+    }
+    setId('');
+    setName('');
+    setDescription('');
+    setPriority('');
+    setDate('');
+  }, [task]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -41,10 +58,6 @@ const TaskModal = ({ setRevalidate }) => {
 
     setRevalidate(true);
   };
-
-  useEffect(() => {
-    console.log(task)
-  }, [task])
 
   return (
     <Transition.Root show={taskModal} as={Fragment}>
@@ -112,7 +125,7 @@ const TaskModal = ({ setRevalidate }) => {
                     as="h3"
                     className="text-4xl leading-6 font-bold text-gray-900"
                   >
-                    Criar Tarefa
+                    {id ? 'Editar Tarefa' : 'Criar Tarefa'}
                   </Dialog.Title>
                   {alert?.msg && (
                     <Alert isError={alert?.isError}>{alert?.msg}</Alert>
@@ -191,7 +204,7 @@ const TaskModal = ({ setRevalidate }) => {
                     <input
                       type="submit"
                       className="bg-sky-600 hover:bg-sky-700 p-3 w-full uppercase text-white font-bold cursor-pointer transition-colors rounded text-sm"
-                      value="Criar Tarefa"
+                      value={id ? 'Salvar Alterações' : 'Criar Tarefa'}
                     />
                   </form>
                 </div>
