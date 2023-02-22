@@ -147,7 +147,7 @@ const ProjectsProvider = ({ children }) => {
       };
 
       const { data } = await axiosClient.post('/tasks', task, config);
-      console.log(data)
+      
     } catch (error) {
       console.log(error);
     }

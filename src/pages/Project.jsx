@@ -1,4 +1,5 @@
-import { Link, redirect, useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import Task from '../components/Task';
 
 import TaskModal from '../components/TaskModal';
@@ -35,9 +36,17 @@ export const loader = async ({ params }) => {
 };
 
 const Project = () => {
+  const [revalidate, setRevalidate] = useState(false);
   const data = useLoaderData();
 
   const { handleTaskModal } = useProjects();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (revalidate) {
+      navigate(`/projects/${data?.params?.id}`);
+    }
+  }, [revalidate]);
 
   return (
     <>
@@ -91,17 +100,21 @@ const Project = () => {
 
       <p className="font-bold text-xl mt-10">Tarefas so Projeto</p>
 
-      <div className="bg-white shadow mt-10 rounded-lg">
-        {data?.project?.tasks?.length ? (
-          data?.project?.tasks?.map(task => <Task key={task._id} task={task} />)
-        ) : (
-          <p className="text-center y-5 p-10">
-            Esse projeto não possui tarefas
-          </p>
-        )}
-      </div>
+      {!revalidate && (
+        <div className="bg-white shadow mt-10 rounded-lg">
+          {data?.project?.tasks?.length ? (
+            data?.project?.tasks?.map(task => (
+              <Task key={task._id} task={task} />
+            ))
+          ) : (
+            <p className="text-center y-5 p-10">
+              Esse projeto não possui tarefas
+            </p>
+          )}
+        </div>
+      )}
 
-      <TaskModal />
+      <TaskModal setRevalidate={setRevalidate} />
     </>
   );
 };

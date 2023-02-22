@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import useProjects from '../hooks/useProjects';
 import Alert from './Alert';
 
-const TaskModal = () => {
+const TaskModal = ({setRevalidate}) => {
   const params = useParams();
 
   const { handleTaskModal, taskModal, showAlert, alert, submitTask } =
@@ -33,6 +33,10 @@ const TaskModal = () => {
       date,
       project: params.id
     });
+    setRevalidate(true)
+    setTimeout(() => {
+      setRevalidate(false)
+    }, 1)
   };
 
   return (
