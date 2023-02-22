@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import useProjects from '../hooks/useProjects';
 import Alert from './Alert';
 
-const TaskModal = ({setRevalidate}) => {
+const TaskModal = ({ setRevalidate }) => {
   const params = useParams();
 
   const { handleTaskModal, taskModal, showAlert, alert, submitTask } =
@@ -16,7 +16,7 @@ const TaskModal = ({setRevalidate}) => {
   const [priority, setPriority] = useState('');
   const [date, setDate] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if ([name, description, priority].includes('')) {
       showAlert({
@@ -26,17 +26,20 @@ const TaskModal = ({setRevalidate}) => {
       return;
     }
 
-    submitTask({
+    await submitTask({
       name,
       description,
       priority,
       date,
       project: params.id
     });
-    setRevalidate(true)
-    setTimeout(() => {
-      setRevalidate(false)
-    }, 1)
+
+    setName('');
+    setDescription('');
+    setPriority('');
+    setDate('');
+
+    setRevalidate(true);
   };
 
   return (

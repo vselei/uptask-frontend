@@ -146,8 +146,9 @@ const ProjectsProvider = ({ children }) => {
         }
       };
 
-      const { data } = await axiosClient.post('/tasks', task, config);
-      
+      await axiosClient.post('/tasks', task, config);
+      setAlert({});
+      setTaskModal(false);
     } catch (error) {
       console.log(error);
     }

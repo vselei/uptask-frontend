@@ -45,6 +45,7 @@ const Project = () => {
   useEffect(() => {
     if (revalidate) {
       navigate(`/projects/${data?.params?.id}`);
+      setRevalidate(false);
     }
   }, [revalidate]);
 
