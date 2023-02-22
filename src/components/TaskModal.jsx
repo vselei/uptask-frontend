@@ -48,9 +48,11 @@ const TaskModal = ({ setRevalidate }) => {
       description,
       priority,
       date,
-      project: params.id
+      project: params.id,
+      id
     });
 
+    setId('');
     setName('');
     setDescription('');
     setPriority('');

@@ -134,7 +134,7 @@ const ProjectsProvider = ({ children }) => {
     setTask({});
   };
 
-  const submitTask = async task => {
+  const createTask = async task => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -153,6 +153,36 @@ const ProjectsProvider = ({ children }) => {
       setTaskModal(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const editTask = async task => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const { data } = await axiosClient.put(`/tasks/${task.id}`, task, config);
+      setAlert({});
+      setTaskModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitTask = async task => {
+    if (task?.id) {
+      await editTask(task);
+    } else {
+      await createTask(task);
     }
   };
 
