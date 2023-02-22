@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useProjects from '../hooks/useProjects';
@@ -8,7 +8,7 @@ import Alert from './Alert';
 const TaskModal = ({ setRevalidate }) => {
   const params = useParams();
 
-  const { handleTaskModal, taskModal, showAlert, alert, submitTask } =
+  const { handleTaskModal, taskModal, showAlert, alert, submitTask, task } =
     useProjects();
 
   const [name, setName] = useState('');
@@ -41,6 +41,10 @@ const TaskModal = ({ setRevalidate }) => {
 
     setRevalidate(true);
   };
+
+  useEffect(() => {
+    console.log(task)
+  }, [task])
 
   return (
     <Transition.Root show={taskModal} as={Fragment}>
