@@ -3,10 +3,14 @@ import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useProjects from '../hooks/useProjects';
-import Alert from './Alert';
 
-const DeleteTaskModal = () => {
-  const { deleteTaskModal, handleDeleteTaskModal } = useProjects();
+const DeleteTaskModal = ({setRevalidate}) => {
+  const { deleteTaskModal, handleDeleteTaskModal, deleteTask } = useProjects();
+
+  const handleDeleteTask = async () => {
+    await deleteTask();
+    setRevalidate(true)
+  }
 
   return (
     <Transition.Root show={deleteTaskModal} as={Fragment}>
@@ -101,6 +105,7 @@ const DeleteTaskModal = () => {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={handleDeleteTask}
                 >
                   Eliminar
                 </button>
