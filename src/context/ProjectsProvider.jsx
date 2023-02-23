@@ -8,6 +8,7 @@ const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [alert, setAlert] = useState({});
   const [taskModal, setTaskModal] = useState(false);
+  const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [task, setTask] = useState({});
 
   const navigate = useNavigate();
@@ -160,6 +161,11 @@ const ProjectsProvider = ({ children }) => {
     setTask(task);
     setTaskModal(true);
   };
+  
+  const handleDeleteTaskModal = task => {
+    setTask(task);
+    setDeleteTaskModal(!deleteTaskModal)
+  }
 
   return (
     <ProjectsContext.Provider
@@ -175,7 +181,9 @@ const ProjectsProvider = ({ children }) => {
         submitTask,
         handleTaskModal,
         task,
-        handleEditTask
+        handleEditTask,
+        handleDeleteTaskModal,
+        deleteTaskModal
       }}
     >
       {children}

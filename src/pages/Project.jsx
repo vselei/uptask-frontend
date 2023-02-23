@@ -3,6 +3,7 @@ import { Link, redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import Task from '../components/Task';
 
 import TaskModal from '../components/TaskModal';
+import DeleteTaskModal from '../components/DeleteTaskModal';
 
 import axiosClient from '../config/axiosClient';
 import useProjects from '../hooks/useProjects';
@@ -116,6 +117,7 @@ const Project = () => {
       )}
 
       <TaskModal setRevalidate={setRevalidate} />
+      <DeleteTaskModal />
     </>
   );
 };

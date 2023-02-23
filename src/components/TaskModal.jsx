@@ -103,7 +103,7 @@ const TaskModal = ({ setRevalidate }) => {
                   className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={handleTaskModal}
                 >
-                  <span className="sr-only">Cerrar</span>
+                  <span className="sr-only">Fechar</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
