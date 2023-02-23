@@ -123,6 +123,16 @@ const Project = () => {
         </div>
       )}
 
+      <div className="flex items-center justify-between mt-10">
+        <p className="font-bold text-xl">Colaboradores</p>
+        <Link
+          to={`/projects/new-collaborator/${data?.project?._id}`}
+          className="text-gray-400 uppercase font-bold hover:text-black transition-colors"
+        >
+          Adicionar
+        </Link>
+      </div>
+
       <TaskModal setRevalidate={setRevalidate} />
       <DeleteTaskModal setRevalidate={setRevalidate} />
     </>
