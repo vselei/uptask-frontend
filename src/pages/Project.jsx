@@ -3,9 +3,11 @@ import { Link, redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import Task from '../components/Task';
 
 import TaskModal from '../components/TaskModal';
+import DeleteTaskModal from '../components/DeleteTaskModal';
 
 import axiosClient from '../config/axiosClient';
 import useProjects from '../hooks/useProjects';
+import Alert from '../components/Alert';
 
 export const loader = async ({ params }) => {
   const { id } = params;
@@ -39,7 +41,7 @@ const Project = () => {
   const [revalidate, setRevalidate] = useState(false);
   const data = useLoaderData();
 
-  const { handleTaskModal } = useProjects();
+  const { handleTaskModal, alert } = useProjects();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,6 +103,12 @@ const Project = () => {
 
       <p className="font-bold text-xl mt-10">Tarefas so Projeto</p>
 
+      <div className="flex justify-center">
+        <div className="w-full md:w-1/3 lg:w-1/4">
+          {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
+        </div>
+      </div>
+
       {!revalidate && (
         <div className="bg-white shadow mt-10 rounded-lg">
           {data?.project?.tasks?.length ? (
@@ -116,6 +124,7 @@ const Project = () => {
       )}
 
       <TaskModal setRevalidate={setRevalidate} />
+      <DeleteTaskModal setRevalidate={setRevalidate} />
     </>
   );
 };
