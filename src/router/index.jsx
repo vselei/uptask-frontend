@@ -26,7 +26,10 @@ import EditProject, {
   loader as editProjectLoader,
   action as editProjectAction
 } from '../pages/EditProject';
-import NewCollab from '../pages/NewCollab';
+import NewCollab, {
+  action as newCollabAction,
+  loader as newCollabLoader
+} from '../pages/NewCollab';
 
 const routes = createBrowserRouter([
   {
@@ -97,7 +100,9 @@ const routes = createBrowserRouter([
       },
       {
         path: '/projects/new-collaborator/:id',
-        element: <NewCollab />
+        element: <NewCollab />,
+        action: newCollabAction,
+        loader: newCollabLoader
       }
     ]
   }

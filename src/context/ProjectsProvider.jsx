@@ -241,7 +241,6 @@ const ProjectsProvider = ({ children }) => {
         handleTaskModal,
         taskModal,
         submitTask,
-        handleTaskModal,
         task,
         handleEditTask,
         handleDeleteTaskModal,
