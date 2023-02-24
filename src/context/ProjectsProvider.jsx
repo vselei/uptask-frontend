@@ -10,6 +10,7 @@ const ProjectsProvider = ({ children }) => {
   const [taskModal, setTaskModal] = useState(false);
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [task, setTask] = useState({});
+  const [collab, setCollab] = useState({});
 
   const navigate = useNavigate();
 
@@ -245,7 +246,9 @@ const ProjectsProvider = ({ children }) => {
         handleEditTask,
         handleDeleteTaskModal,
         deleteTaskModal,
-        deleteTask
+        deleteTask,
+        setCollab, 
+        collab
       }}
     >
       {children}
