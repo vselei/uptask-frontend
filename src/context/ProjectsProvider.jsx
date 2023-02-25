@@ -230,7 +230,39 @@ const ProjectsProvider = ({ children }) => {
     }
   };
 
-  const addCollab = async email => {};
+  const addCollab = async (email, projectId) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const { data } = await axiosClient.post(
+        `/projects/collaborators/${projectId}`,
+        email,
+        config
+      );
+
+      setAlert({
+        msg: data.msg,
+        isError: false
+      });
+      setCollab({});
+      setAlert({});
+    } catch (error) {
+      showAlert({
+        msg: error.response.data.msg,
+        isError: true
+      });
+    }
+  };
 
   return (
     <ProjectsContext.Provider

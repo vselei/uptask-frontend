@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { Form, useActionData, useLoaderData } from 'react-router-dom';
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useParams
+} from 'react-router-dom';
 import Alert from '../components/Alert';
 import CollabForm from '../components/CollabForm';
 import axiosClient from '../config/axiosClient';
@@ -73,8 +78,9 @@ export const action = async ({ request }) => {
 const NewCollab = () => {
   const data = useActionData();
   const project = useLoaderData();
+  const { id } = useParams();
 
-  const { setCollab, collab, addCollab } = useProjects();
+  const { setCollab, collab, addCollab, alert, showAlert } = useProjects();
 
   useEffect(() => {
     if (data?.name) {
@@ -100,6 +106,7 @@ const NewCollab = () => {
         </Form>
       </div>
 
+      {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
       {collab?._id && (
         <div className="flex justify-center mt-10">
           <div className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow">
@@ -110,9 +117,12 @@ const NewCollab = () => {
                 type="button"
                 className="bg-slate-500 px-5 py-2 uppercase rounded-lg text-white font-bold text-sm"
                 onClick={() =>
-                  addCollab({
-                    email: collab.email
-                  })
+                  addCollab(
+                    {
+                      email: collab.email
+                    },
+                    id
+                  )
                 }
               >
                 Adicionar ao Projeto
