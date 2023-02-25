@@ -8,6 +8,7 @@ import DeleteTaskModal from '../components/DeleteTaskModal';
 import axiosClient from '../config/axiosClient';
 import useProjects from '../hooks/useProjects';
 import Alert from '../components/Alert';
+import Collab from '../components/Collab';
 
 export const loader = async ({ params }) => {
   const { id } = params;
@@ -116,7 +117,7 @@ const Project = () => {
               <Task key={task._id} task={task} />
             ))
           ) : (
-            <p className="text-center y-5 p-10">
+            <p className="text-center py-5 p-10">
               Esse projeto não possui tarefas
             </p>
           )}
@@ -132,6 +133,18 @@ const Project = () => {
           Adicionar
         </Link>
       </div>
+
+      <div className="bg-white shadow mt-10 rounded-lg">
+          {data?.project?.collaborators?.length ? (
+            data?.project?.collaborators?.map(collaborator => (
+              <Collab key={collaborator._id} collaborator={collaborator} />
+            ))
+          ) : (
+            <p className="text-center py-5 p-10">
+              Esse projeto não possui colaboradores
+            </p>
+          )}
+        </div>
 
       <TaskModal setRevalidate={setRevalidate} />
       <DeleteTaskModal setRevalidate={setRevalidate} />
