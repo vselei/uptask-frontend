@@ -1,4 +1,8 @@
+import useProjects from '../hooks/useProjects';
+
 const Collab = ({ collaborator }) => {
+  const { handleDeleteCollabModal } = useProjects();
+
   const { name, email } = collaborator;
 
   return (
@@ -11,6 +15,7 @@ const Collab = ({ collaborator }) => {
         <button
           type="button"
           className="bg-red-600 px-4  py-3 text-white uppercase font-bold text-sm rounded-lg"
+          onClick={() => handleDeleteCollabModal(collaborator)}
         >
           Deletar
         </button>

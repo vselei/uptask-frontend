@@ -9,6 +9,7 @@ import axiosClient from '../config/axiosClient';
 import useProjects from '../hooks/useProjects';
 import Alert from '../components/Alert';
 import Collab from '../components/Collab';
+import DeleteCollabModal from '../components/DeleteCollabModal';
 
 export const loader = async ({ params }) => {
   const { id } = params;
@@ -148,6 +149,7 @@ const Project = () => {
 
       <TaskModal setRevalidate={setRevalidate} />
       <DeleteTaskModal setRevalidate={setRevalidate} />
+      <DeleteCollabModal setRevalidate={setRevalidate} />
     </>
   );
 };

@@ -11,6 +11,7 @@ const ProjectsProvider = ({ children }) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [task, setTask] = useState({});
   const [collab, setCollab] = useState({});
+  const [deleteCollabModal, setDeleteCollabModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -264,6 +265,15 @@ const ProjectsProvider = ({ children }) => {
     }
   };
 
+  const handleDeleteCollabModal = collaborator => {
+    setDeleteCollabModal(!deleteCollabModal);
+    setCollab(collaborator);
+  };
+
+  const deleteCollab = async () => {
+
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -283,7 +293,10 @@ const ProjectsProvider = ({ children }) => {
         deleteTask,
         setCollab,
         collab,
-        addCollab
+        addCollab,
+        deleteCollabModal,
+        handleDeleteCollabModal,
+        deleteCollab
       }}
     >
       {children}
