@@ -1,13 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 
 import useProjects from '../hooks/useProjects';
 
 const DeleteCollabModal = ({ setRevalidate }) => {
-  const { handleDeleteCollabModal, deleteCollabModal, deleteCollab } = useProjects();
+  const { id } = useParams();
+
+  const { handleDeleteCollabModal, deleteCollabModal, deleteCollab } =
+    useProjects();
 
   const handleDeleteCollab = async () => {
-    await deleteCollab();
+    await deleteCollab(id);
     setRevalidate(true);
   };
 

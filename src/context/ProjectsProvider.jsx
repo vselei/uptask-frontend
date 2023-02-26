@@ -270,9 +270,41 @@ const ProjectsProvider = ({ children }) => {
     setCollab(collaborator);
   };
 
-  const deleteCollab = async () => {
+  const deleteCollab = async projectId => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
 
-  }
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const { data } = await axiosClient.post(
+        `/projects/delete-collaborator/${projectId}`,
+        { id: collab._id },
+        config
+      );
+
+      setAlert({
+        msg: data.msg,
+        isError: false
+      });
+
+      setDeleteCollabModal(false);
+      setCollab({});
+
+      setTimeout(() => {
+        setAlert({});
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ProjectsContext.Provider
