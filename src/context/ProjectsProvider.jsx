@@ -306,6 +306,29 @@ const ProjectsProvider = ({ children }) => {
     }
   };
 
+  const completeTask = async id => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      await axiosClient.post(`/tasks/state/${id}`, {}, config);
+
+      setTask({});
+      setAlert({});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -328,7 +351,8 @@ const ProjectsProvider = ({ children }) => {
         addCollab,
         deleteCollabModal,
         handleDeleteCollabModal,
-        deleteCollab
+        deleteCollab,
+        completeTask
       }}
     >
       {children}

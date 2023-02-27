@@ -52,6 +52,7 @@ const Project = () => {
   useEffect(() => {
     if (revalidate) {
       navigate(`/projects/${data?.params?.id}`);
+      console.log('test')
       setRevalidate(false);
     }
   }, [revalidate]);
@@ -129,7 +130,12 @@ const Project = () => {
             <div className="bg-white shadow mt-10 rounded-lg">
               {data?.project?.tasks?.length ? (
                 data?.project?.tasks?.map(task => (
-                  <Task key={task._id} project={data.project} task={task} />
+                  <Task
+                    key={task._id}
+                    project={data.project}
+                    task={task}
+                    setRevalidate={setRevalidate}
+                  />
                 ))
               ) : (
                 <p className="text-center py-5 p-10">

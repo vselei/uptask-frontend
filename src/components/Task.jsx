@@ -2,8 +2,8 @@ import { dateFormatter } from '../helpers/dateFormatter';
 import useAdmin from '../hooks/useAdmin';
 import useProjects from '../hooks/useProjects';
 
-const Task = ({ task, project }) => {
-  const { handleEditTask, handleDeleteTaskModal } = useProjects();
+const Task = ({ task, project, setRevalidate }) => {
+  const { handleEditTask, handleDeleteTaskModal, completeTask } = useProjects();
   const admin = useAdmin(project);
 
   const { description, priority, name, date, state } = task;
@@ -24,15 +24,17 @@ const Task = ({ task, project }) => {
             Editar
           </button>
         )}
-        {state ? (
-          <button className="bg-sky-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg">
-            Completa
-          </button>
-        ) : (
-          <button className="bg-gray-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg">
-            Incompleta
-          </button>
-        )}
+        <button
+          className={`${
+            state ? 'bg-sky-600' : 'bg-slate-600'
+          } px-4 py-3 text-white uppercase font-bold text-sm rounded-lg`}
+          onClick={async () => {
+            await completeTask(task._id);
+            setRevalidate(true);
+          }}
+        >
+          {state ? 'Completa' : 'Incompleta'}
+        </button>
         {admin && (
           <button
             className="bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
