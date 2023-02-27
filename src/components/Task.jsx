@@ -1,10 +1,12 @@
 import { dateFormatter } from '../helpers/dateFormatter';
+import useAdmin from '../hooks/useAdmin';
 import useProjects from '../hooks/useProjects';
 
-const Task = ({ task }) => {
+const Task = ({ task, project }) => {
   const { handleEditTask, handleDeleteTaskModal } = useProjects();
+  const admin = useAdmin(project);
 
-  const { description, priority, name, date, _id, state } = task;
+  const { description, priority, name, date, state } = task;
   return (
     <div className="border-b p-5 flex justify-between items-center">
       <div className="space-y-2">
@@ -14,12 +16,14 @@ const Task = ({ task }) => {
         <p className="text-gray-600">Prioridade: {priority}</p>
       </div>
       <div className="flex gap-2">
-        <button
-          className="bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-          onClick={() => handleEditTask(task)}
-        >
-          Editar
-        </button>
+        {admin && (
+          <button
+            className="bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+            onClick={() => handleEditTask(task)}
+          >
+            Editar
+          </button>
+        )}
         {state ? (
           <button className="bg-sky-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg">
             Completa
@@ -29,9 +33,14 @@ const Task = ({ task }) => {
             Incompleta
           </button>
         )}
-        <button className="bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg" onClick={() => handleDeleteTaskModal(task)}>
-          Deletar
-        </button>
+        {admin && (
+          <button
+            className="bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+            onClick={() => handleDeleteTaskModal(task)}
+          >
+            Deletar
+          </button>
+        )}
       </div>
     </div>
   );
