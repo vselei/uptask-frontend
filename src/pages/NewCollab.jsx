@@ -95,7 +95,7 @@ const NewCollab = () => {
       </h1>
       <div className="mt-10 flex justify-center">
         <Form
-          className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow"
+          className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow w-full"
           method="post"
           noValidate
         >
@@ -109,7 +109,7 @@ const NewCollab = () => {
       {alert?.msg && <Alert isError={alert?.isError}>{alert?.msg}</Alert>}
       {collab?._id && (
         <div className="flex justify-center mt-10">
-          <div className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow">
+          <div className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow w-full">
             <h2 className="text-center mb-10 font-bold text-2xl">Resultado:</h2>
             <div className="flex justify-between items-center">
               <p>{collab.name}</p>

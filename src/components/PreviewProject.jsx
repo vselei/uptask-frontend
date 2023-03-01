@@ -7,7 +7,7 @@ const PreviewProject = ({ project }) => {
   const { name, _id, client, creator } = project;
 
   return (
-    <div className="border-b p-5 flex justify-between">
+    <div className="border-b p-5 flex justify-between flex-col md:flex-row">
       <div className="flex items-center gap-2">
         <p className="flex-1">
           {name}{' '}
