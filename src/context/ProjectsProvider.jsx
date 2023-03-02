@@ -12,6 +12,7 @@ const ProjectsProvider = ({ children }) => {
   const [task, setTask] = useState({});
   const [collab, setCollab] = useState({});
   const [deleteCollabModal, setDeleteCollabModal] = useState(false);
+  const [search, setSearch] = useState(false);
 
   const navigate = useNavigate();
 
@@ -329,6 +330,10 @@ const ProjectsProvider = ({ children }) => {
     }
   };
 
+  const handleSearch = () => {
+    setSearch(!search);
+  };
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -352,7 +357,9 @@ const ProjectsProvider = ({ children }) => {
         deleteCollabModal,
         handleDeleteCollabModal,
         deleteCollab,
-        completeTask
+        completeTask,
+        search,
+        handleSearch
       }}
     >
       {children}

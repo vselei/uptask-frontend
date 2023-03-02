@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
+import useProjects from '../hooks/useProjects';
+
+import Search from './Search';
 
 const Header = () => {
+  const { handleSearch, search } = useProjects();
+
   return (
     <header className="px-4 py-5 bg-white border-b">
       <div className="md:flex md:justify-between">
@@ -13,7 +18,11 @@ const Header = () => {
           className="rounded-lg lg:w-96 block p-2 border"
         />
         <div className="flex flex-col md:flex-row items-center gap-4">
-          <button type="button" className="font-bold uppercase">
+          <button
+            onClick={handleSearch}
+            type="button"
+            className="font-bold uppercase"
+          >
             Buscar Projetos
           </button>
           <Link to="/projects" className="font-bold uppercase">
@@ -25,6 +34,8 @@ const Header = () => {
           >
             Encerrar Sessão
           </button>
+
+          <Search />
         </div>
       </div>
     </header>
