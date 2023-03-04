@@ -10,6 +10,7 @@ const Projects = () => {
 
   useEffect(() => {
     socket = io(import.meta.env.VITE_API_URL);
+    socket.emit('proof', projects)
   }, []);
 
   return (
