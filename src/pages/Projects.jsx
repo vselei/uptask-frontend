@@ -1,8 +1,16 @@
 import PreviewProject from '../components/PreviewProject';
 import useProjects from '../hooks/useProjects';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
+
+let socket;
 
 const Projects = () => {
   const { projects } = useProjects();
+
+  useEffect(() => {
+    socket = io(import.meta.env.VITE_API_URL);
+  }, []);
 
   return (
     <>
