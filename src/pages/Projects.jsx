@@ -10,8 +10,12 @@ const Projects = () => {
 
   useEffect(() => {
     socket = io(import.meta.env.VITE_API_URL);
-    socket.emit('proof', projects)
-  }, []);
+    socket.emit('proof', projects);
+
+    socket.on('response', person => {
+      console.log(person);
+    });
+  }, [projects]);
 
   return (
     <>
