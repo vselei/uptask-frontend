@@ -2,6 +2,10 @@ import { useState, useEffect, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
 
+import io from 'socket.io-client';
+
+let socket;
+
 const ProjectsContext = createContext();
 
 const ProjectsProvider = ({ children }) => {
@@ -82,6 +86,10 @@ const ProjectsProvider = ({ children }) => {
     getProjects();
   }, []);
 
+  useEffect(() => {
+    socket = io(import.meta.env.VITE_API_URL);
+  }, []);
+
   const updateProject = async actionData => {
     const updatedProjects = projects.map(projectState =>
       projectState._id === actionData._id ? actionData : projectState
@@ -152,9 +160,12 @@ const ProjectsProvider = ({ children }) => {
         }
       };
 
-      await axiosClient.post('/tasks', task, config);
+      const { data } = await axiosClient.post('/tasks', task, config);
       setAlert({});
       setTaskModal(false);
+
+      /* socket io */
+      socket.emit('new task', data);
     } catch (error) {
       console.log(error);
     }

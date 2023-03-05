@@ -55,7 +55,6 @@ const Project = () => {
   useEffect(() => {
     if (revalidate) {
       navigate(`/projects/${data?.params?.id}`);
-      console.log('test');
       setRevalidate(false);
     }
   }, [revalidate]);
@@ -66,10 +65,10 @@ const Project = () => {
   }, []);
 
   useEffect(() => {
-    socket.on('response', (person) => {
-      console.log(person)
-    })
-  })
+    socket.on('task added', task => {
+      if (task.project === data.project._id) setRevalidate(true);
+    });
+  });
 
   return (
     <>
