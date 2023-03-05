@@ -12,6 +12,9 @@ import Collab from '../components/Collab';
 import DeleteCollabModal from '../components/DeleteCollabModal';
 import useAdmin from '../hooks/useAdmin';
 
+import io from 'socket.io-client';
+let socket;
+
 export const loader = async ({ params }) => {
   const { id } = params;
 
@@ -56,6 +59,17 @@ const Project = () => {
       setRevalidate(false);
     }
   }, [revalidate]);
+
+  useEffect(() => {
+    socket = io(import.meta.env.VITE_API_URL);
+    socket.emit('open', data.params.id);
+  }, []);
+
+  useEffect(() => {
+    socket.on('response', (person) => {
+      console.log(person)
+    })
+  })
 
   return (
     <>
