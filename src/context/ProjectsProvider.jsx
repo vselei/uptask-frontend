@@ -233,11 +233,14 @@ const ProjectsProvider = ({ children }) => {
       });
 
       setDeleteTaskModal(false);
+      
+      socket.emit('delete task', task);
+      
       setTask({});
-
       setTimeout(() => {
         setAlert({});
       }, 3000);
+
     } catch (error) {
       console.log(error);
     }
@@ -344,6 +347,8 @@ const ProjectsProvider = ({ children }) => {
   const handleSearch = () => {
     setSearch(!search);
   };
+
+
 
   return (
     <ProjectsContext.Provider

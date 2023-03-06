@@ -68,6 +68,10 @@ const Project = () => {
     socket.on('task added', task => {
       if (task.project === data.project._id) setRevalidate(true);
     });
+
+    socket.on('deleted task', task => {
+      if (task.project === data.project._id) setRevalidate(true);
+    });
   });
 
   return (
