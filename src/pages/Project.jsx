@@ -76,6 +76,10 @@ const Project = () => {
     socket.on('updated task', task => {
       if (task.project._id === data.project._id) setRevalidate(true);
     });
+
+    socket.on('state changed', task => {
+      if (task.project._id === data.project._id) setRevalidate(true);
+    });
   });
 
   return (
