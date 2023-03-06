@@ -188,6 +188,8 @@ const ProjectsProvider = ({ children }) => {
       const { data } = await axiosClient.put(`/tasks/${task.id}`, task, config);
       setAlert({});
       setTaskModal(false);
+
+      socket.emit('update task', data);
     } catch (error) {
       console.log(error);
     }
@@ -233,7 +235,7 @@ const ProjectsProvider = ({ children }) => {
       });
 
       setDeleteTaskModal(false);
-      
+
       socket.emit('delete task', task);
       
       setTask({});
