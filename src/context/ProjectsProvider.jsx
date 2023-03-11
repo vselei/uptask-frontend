@@ -351,6 +351,11 @@ const ProjectsProvider = ({ children }) => {
     setSearch(!search);
   };
 
+  const closeSessionProjects = () => {
+    setProjects([]);
+    setAlert({})
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -376,7 +381,8 @@ const ProjectsProvider = ({ children }) => {
         deleteCollab,
         completeTask,
         search,
-        handleSearch
+        handleSearch,
+        closeSessionProjects
       }}
     >
       {children}
